@@ -1,16 +1,17 @@
 package com.ned.j.v.login.backend;
 
 import com.ned.j.v.data.conectionDB;
+import com.ned.j.v.data.usersDT;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+
 public class conectionUser {
-    public static void getaccess(String txt_user, String txt_password){
-        
-        users us = new users();
+    public static boolean getaccess(String txt_user, String txt_password){
+ 
         PreparedStatement ps;
         ResultSet rs;
         ResultSetMetaData rsmd;
@@ -31,7 +32,7 @@ public class conectionUser {
                 accessUser = false;
                 accessPassword = false;
                 
-                for(int i=1; i<3; i++){
+                for(int i=1; i<4; i++){
                     users_[i] = rs.getObject(i + 1);
                     
                     if (i==1){
@@ -44,10 +45,11 @@ public class conectionUser {
                         } 
                     }
                     
-                    if ((accessUser) && (accessPassword)){
-                         us.setUsername(txt_user);
-                         us.setPassword(txt_password);
+                    if ((accessUser) && (accessPassword) && i==3){
                          loginDone = true;
+                         usersDT.userName = txt_user;
+                         usersDT.password = txt_password;
+                         usersDT.rol = users_[i].toString();
                          System.out.println("successful login");
                          break;
                     }
@@ -59,9 +61,13 @@ public class conectionUser {
             
             if (!accessUser || !accessPassword){
                 System.err.println("username not found");
+                return false;
+            }else{
+                return true;
             }
         } catch (SQLException e) {
             System.out.println("ERROR: " + e);
         }                
+        return false;
     }
 }

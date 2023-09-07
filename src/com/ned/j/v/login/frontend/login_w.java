@@ -1,5 +1,6 @@
 package com.ned.j.v.login.frontend;
 
+import com.ned.j.v.login.backend.changewindows;
 import com.ned.j.v.login.backend.conectionUser;
 
 public class login_w extends javax.swing.JFrame {
@@ -8,6 +9,8 @@ public class login_w extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    boolean change = false;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -84,7 +87,9 @@ public class login_w extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
-        conectionUser.getaccess(txt_username.getText(), txt_password.getText());
+        change = conectionUser.getaccess(txt_username.getText().toUpperCase(), txt_password.getText().toUpperCase()); 
+        if (change) {changewindows.changewindows_home();}
+        this.setVisible(false);
     }//GEN-LAST:event_btn_loginActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
