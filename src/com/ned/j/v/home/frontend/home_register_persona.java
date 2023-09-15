@@ -1,6 +1,9 @@
 package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.data.conectionDB;
+import com.ned.j.v.data.usersDT;
+import com.ned.j.v.home.backend.home_datosPersona;
+import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +30,7 @@ public class home_register_persona extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_nombre1 = new javax.swing.JTextField();
+        txt_nombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_apellidoP = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -62,7 +65,7 @@ public class home_register_persona extends javax.swing.JPanel {
 
         jLabel2.setText("Nombres:");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
-        add(txt_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 112, 291, 32));
+        add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 112, 291, 32));
 
         jLabel3.setText("Apellido Paterno:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, -1, -1));
@@ -128,13 +131,13 @@ public class home_register_persona extends javax.swing.JPanel {
 
         add(jComboBox_sexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 180, 30));
 
-        jButton1.setText("Guardar");
+        jButton1.setText("Siguiente");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 120, 40));
 
         jLabel10.setText("Seleccionar Etnia:");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
@@ -178,10 +181,59 @@ public class home_register_persona extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheck_emailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        System.out.println(SexoID_.get(jComboBox_sexo.getSelectedIndex()));
-        System.out.println(EtniaID_.get(jComboBox_etnia.getSelectedIndex()));
-        System.out.println(ProfesionID_.get(jComboBox_profesion.getSelectedIndex()));
+        // Siguiente
+        String FechaNa = "";
+        
+        home_datosPersona.persona_nombre = txt_nombre.getText().toUpperCase();
+        home_datosPersona.persona_apellidop = txt_apellidoP.getText().toUpperCase();
+        home_datosPersona.persona_apellidom = txt_apellidoM.getText().toUpperCase();
+        
+        if (!jCheck_ac.isSelected()){
+            home_datosPersona.persona_apellidoc = usersDT.defaultD;
+        }else{
+            home_datosPersona.persona_apellidoc = txt_apellidoC.getText().toUpperCase();
+        }
+        
+        FechaNa = txt_mm.getText() + "-" + txt_dd.getText() + "-" + txt_yy.getText();
+        home_datosPersona.persona_fechaN = FechaNa;
+        
+        if (!jCheck_nt.isSelected()){
+            home_datosPersona.persona_numeroT = "0";
+        }else{
+            home_datosPersona.persona_numeroT = txt_numeroT.getText().toUpperCase();
+        }
+        
+        if (!jCheck_email.isSelected()){
+            home_datosPersona.persona_email = usersDT.defaultD;
+        }else{
+            home_datosPersona.persona_email = txt_email.getText().toUpperCase();
+        }
+        
+        home_datosPersona.persona_sexo = SexoID_.get(jComboBox_sexo.getSelectedIndex());
+        home_datosPersona.persona_etnia = EtniaID_.get(jComboBox_etnia.getSelectedIndex());
+        home_datosPersona.persona_profesion = ProfesionID_.get(jComboBox_profesion.getSelectedIndex());
+        
+        if (jComboBox_profesion.getSelectedItem().equals("ESTUDIANTE")){
+            //Limpiamos
+            home_register_estudiantes windows_estudiante = new home_register_estudiantes();
+            windows_estudiante.setSize(940, 565);
+            windows_estudiante.setLocation(0,0);
+
+            home_register.jpanel_container_register.removeAll();
+            home_register.jpanel_container_register.add(windows_estudiante, BorderLayout.CENTER);
+            home_register.jpanel_container_register.revalidate();
+            home_register.jpanel_container_register.repaint();
+        }else if (jComboBox_profesion.getSelectedItem().equals("CATEDRÁTICO")){
+            home_register_catedratico windows_catedratico = new home_register_catedratico();
+            windows_catedratico.setSize(940, 565);
+            windows_catedratico.setLocation(0,0);
+            
+            home_register.jpanel_container_register.removeAll();
+            home_register.jpanel_container_register.add(windows_catedratico, BorderLayout.CENTER);
+            home_register.jpanel_container_register.revalidate();
+            home_register.jpanel_container_register.repaint();
+        }
+      
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void check_dataSexo(){
@@ -295,7 +347,7 @@ public class home_register_persona extends javax.swing.JPanel {
     private javax.swing.JTextField txt_dd;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_mm;
-    private javax.swing.JTextField txt_nombre1;
+    private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_numeroT;
     private javax.swing.JTextField txt_yy;
     // End of variables declaration//GEN-END:variables

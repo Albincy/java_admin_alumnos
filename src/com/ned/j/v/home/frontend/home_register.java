@@ -189,6 +189,6 @@ public class home_register extends javax.swing.JPanel {
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPanel jpanel_container_register;
+    public static javax.swing.JPanel jpanel_container_register;
     // End of variables declaration//GEN-END:variables
 }
