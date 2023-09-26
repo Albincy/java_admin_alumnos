@@ -20,5 +20,6 @@ public class home_datosPersona {
     public static String estudiante_ano_carrera;
     
     //Catedradico
-    public static String estudiante_DPI;
+    public static String catedratico_ID;
+    public static String catedratico_DPI;
 }

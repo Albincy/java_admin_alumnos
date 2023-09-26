@@ -116,4 +116,26 @@ public class home_register_back {
             e.printStackTrace();
         }
     }
+    
+    public void register_tbl_catedratico_has_materia(String catedratico, String materia, String ciclo){
+        PreparedStatement ps;
+        ResultSet rs;
+        String InsertSQL = "INSERT INTO TBL_CATEDRATICO_HAS_MATERIAS "
+                + "(CATEDRATICO_HAS_MATERIAS_CATEDRATICO, CATEDRATICO_HAS_MATERIAS_MATERIA, CATEDRATICO_HAS_MATERIAS_CICLO)"
+                + " VALUES ('"+catedratico+"', '"+materia+"', '"+ciclo+"')";
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement(InsertSQL, Statement.RETURN_GENERATED_KEYS);
+            ps.execute();
+            rs = ps.getGeneratedKeys();
+            
+            while(rs.next()){
+                rs.getString(1);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

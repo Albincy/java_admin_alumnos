@@ -50,7 +50,6 @@ public class conectionUser {
                          usersDT.userName = txt_user;
                          usersDT.password = txt_password;
                          usersDT.rol = users_[i].toString();
-                         System.out.println("successful login");
                          break;
                     }
                 }
@@ -60,7 +59,7 @@ public class conectionUser {
             }
             
             if (!accessUser || !accessPassword){
-                System.err.println("username not found");
+                System.out.println("El usuario no fue encontrado");
                 return false;
             }else{
                 return true;

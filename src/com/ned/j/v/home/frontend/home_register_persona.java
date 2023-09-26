@@ -194,7 +194,7 @@ public class home_register_persona extends javax.swing.JPanel {
             home_datosPersona.persona_apellidoc = txt_apellidoC.getText().toUpperCase();
         }
         
-        FechaNa = txt_mm.getText() + "-" + txt_dd.getText() + "-" + txt_yy.getText();
+        FechaNa = txt_yy.getText() + "-" + txt_mm.getText() + "-" + txt_dd.getText();
         home_datosPersona.persona_fechaN = FechaNa;
         
         if (!jCheck_nt.isSelected()){
