@@ -14,10 +14,14 @@ import javax.swing.JOptionPane;
 public class home_inscripciones extends javax.swing.JPanel {
 
     ArrayList<String> CicloID_ = new ArrayList<>();
+    ArrayList<String> AnoCarreraID_ = new ArrayList<>();
     
     public home_inscripciones() {
         initComponents();
         obtenerCiclo();
+        ObteneranoCarrera();
+        jLabel_ano_carrera.setVisible(false);
+        jComboBox_ano_Carrera.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -30,20 +34,86 @@ public class home_inscripciones extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jComboBox_ciclo = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jRadioButton_si = new javax.swing.JRadioButton();
+        jRadioButton_no = new javax.swing.JRadioButton();
+        jComboBox_ano_Carrera = new javax.swing.JComboBox<>();
+        jLabel_ano_carrera = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(940, 660));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Inscripcion de estudiantes");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Numero de CUI del Estudiante:");
 
+        txt_cui.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Ciclo de la Inscripción:");
 
+        jButton1.setBackground(new java.awt.Color(33, 53, 85));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/asignar.png"))); // NOI18N
         jButton1.setText("Inscribir estudiante");
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Primer Ingreso:");
+
+        jRadioButton_si.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton_si.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jRadioButton_si.setText("Si");
+        jRadioButton_si.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_siActionPerformed(evt);
+            }
+        });
+
+        jRadioButton_no.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton_no.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jRadioButton_no.setText("No");
+        jRadioButton_no.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_noActionPerformed(evt);
+            }
+        });
+
+        jComboBox_ano_Carrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel_ano_carrera.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_ano_carrera.setText("Año de Ingreso:");
+
+        jButton2.setBackground(new java.awt.Color(33, 53, 85));
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Comprobar");
+        jButton2.setBorderPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton2MouseExited(evt);
             }
         });
 
@@ -54,36 +124,61 @@ public class home_inscripciones extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(354, 354, 354)
+                        .addGap(303, 303, 303)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(141, 141, 141)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
-                            .addComponent(txt_cui)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioButton_si)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jRadioButton_no)))
+                                .addGap(167, 167, 167)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_ano_carrera)
+                                    .addComponent(jComboBox_ano_Carrera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jLabel3)
-                            .addComponent(jComboBox_ciclo, 0, 655, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_cui, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addComponent(jComboBox_ciclo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(366, 366, 366)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(144, Short.MAX_VALUE))
+                        .addGap(332, 332, 332)
+                        .addComponent(jButton1)))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel1)
-                .addGap(59, 59, 59)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(txt_cui, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_cui, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel_ano_carrera))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton_si)
+                    .addComponent(jRadioButton_no)
+                    .addComponent(jComboBox_ano_Carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox_ciclo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(142, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -97,6 +192,34 @@ public class home_inscripciones extends javax.swing.JPanel {
         
         txt_cui.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+        jButton1.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton1MouseEntered
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+       jButton1.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton1MouseExited
+
+    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
+        jButton2.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton2MouseEntered
+
+    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
+       jButton2.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton2MouseExited
+
+    private void jRadioButton_siActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_siActionPerformed
+        jRadioButton_no.setSelected(false);
+        jLabel_ano_carrera.setVisible(false);
+        jComboBox_ano_Carrera.setVisible(false);
+    }//GEN-LAST:event_jRadioButton_siActionPerformed
+
+    private void jRadioButton_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_noActionPerformed
+        jRadioButton_si.setSelected(false);
+        jLabel_ano_carrera.setVisible(true);
+        jComboBox_ano_Carrera.setVisible(true);
+    }//GEN-LAST:event_jRadioButton_noActionPerformed
 
     private void obtenerCiclo(){
         PreparedStatement ps;
@@ -146,13 +269,47 @@ public class home_inscripciones extends javax.swing.JPanel {
              System.out.println("ERROR: " + e);
         }
     }
+    
+    private void ObteneranoCarrera(){
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int column;
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement("SELECT * FROM TBL_ANO_CARRERA");    
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            column = rsmd.getColumnCount();
+            
+             while(rs.next()){
+                Object[] carrera_ = new Object[column];
+                
+                 for(int i=1; i<2; i++){
+                     carrera_[i] = rs.getObject(i+1);
+                     jComboBox_ano_Carrera.addItem(carrera_[i].toString());
+                 }               
+                 AnoCarreraID_.add(rs.getObject(1).toString());
+             }
+            
+        } catch (SQLException e) {
+             System.out.println("ERROR: " + e);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox_ano_Carrera;
     private javax.swing.JComboBox<String> jComboBox_ciclo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel_ano_carrera;
+    private javax.swing.JRadioButton jRadioButton_no;
+    private javax.swing.JRadioButton jRadioButton_si;
     private javax.swing.JTextField txt_cui;
     // End of variables declaration//GEN-END:variables
 }

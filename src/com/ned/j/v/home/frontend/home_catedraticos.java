@@ -32,27 +32,59 @@ public class home_catedraticos extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(960, 660));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Catedráticos");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-        add(txt_catedraticos, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 70, 580, 43));
 
+        txt_catedraticos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        add(txt_catedraticos, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 70, 430, 43));
+
+        jButton1.setBackground(new java.awt.Color(33, 53, 85));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/lupa.png"))); // NOI18N
         jButton1.setText("Buscar Catedrático");
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(626, 70, 147, 43));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 240, 43));
 
+        jButton2.setBackground(new java.awt.Color(33, 53, 85));
+        jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/asignar.png"))); // NOI18N
         jButton2.setText("Asignar Materia");
+        jButton2.setBorderPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton2MouseExited(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(785, 70, 136, 43));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 200, 43));
 
         jRadioButt_catedratico.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButt_catedratico.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jRadioButt_catedratico.setText("Catedráticos Con materia");
         jRadioButt_catedratico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,13 +113,24 @@ public class home_catedraticos extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 194, 910, -1));
 
-        jButton3.setText("actualizar");
+        jButton3.setBackground(new java.awt.Color(33, 53, 85));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/actualizar.png"))); // NOI18N
+        jButton3.setBorderPainted(false);
+        jButton3.setFocusPainted(false);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton3MouseExited(evt);
+            }
+        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, -1, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 150, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -118,6 +161,30 @@ public class home_catedraticos extends javax.swing.JPanel {
             buscarcatedratico("F_BUSCAR_CATEDRATICO_SIN", txt_catedraticos.getText().toUpperCase());
          }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+        jButton1.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton1MouseEntered
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+       jButton1.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton1MouseExited
+
+    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
+         jButton2.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton2MouseEntered
+
+    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
+        jButton2.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton2MouseExited
+
+    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
+         jButton3.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton3MouseEntered
+
+    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
+        jButton3.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton3MouseExited
 
     private void loadtabla(String Vista){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_catedraticos.getModel();

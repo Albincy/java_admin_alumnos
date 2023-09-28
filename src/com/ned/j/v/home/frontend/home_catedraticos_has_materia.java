@@ -43,16 +43,36 @@ public class home_catedraticos_has_materia extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Asignar Materia a Catedratico");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("DPI Catedratico:");
 
+        txt_catedratico.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Materia:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Ciclo");
 
+        jButton1.setBackground(new java.awt.Color(33, 53, 85));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/add.png"))); // NOI18N
         jButton1.setText("Asignar Materia");
         jButton1.setToolTipText("");
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -65,9 +85,6 @@ public class home_catedraticos_has_materia extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(275, 275, 275)
-                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -82,16 +99,19 @@ public class home_catedraticos_has_materia extends javax.swing.JDialog {
                                     .addComponent(jLabel4)
                                     .addComponent(jComboBox_ciclo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(288, 288, 288)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(186, 186, 186)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(262, 262, 262)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -106,9 +126,9 @@ public class home_catedraticos_has_materia extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox_ciclo, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(jComboBox_materia))
-                .addGap(52, 52, 52)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,11 +149,24 @@ public class home_catedraticos_has_materia extends javax.swing.JDialog {
         // asignar materia
         busquedaDpi(txt_catedratico.getText().toUpperCase());
         home_register_back hr = new home_register_back();
-        hr.register_tbl_catedratico_has_materia(home_datosPersona.catedratico_ID, MateriaID_.get(jComboBox_materia.getSelectedIndex()), CicloID_.get(jComboBox_ciclo.getSelectedIndex()));
         
-        JOptionPane.showMessageDialog(null, "Se asigno una materia al catedratico", "Materia Asignada", JOptionPane.INFORMATION_MESSAGE);
-        txt_catedratico.setText("");
+        if(txt_catedratico.getText().length() > 0){
+            hr.register_tbl_catedratico_has_materia(home_datosPersona.catedratico_ID, MateriaID_.get(jComboBox_materia.getSelectedIndex()), CicloID_.get(jComboBox_ciclo.getSelectedIndex()));
+            JOptionPane.showMessageDialog(null, "Se asigno una materia al catedratico", "Materia Asignada", JOptionPane.INFORMATION_MESSAGE);
+            txt_catedratico.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "El Campo no debe estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+        jButton1.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton1MouseEntered
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+         jButton1.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton1MouseExited
     
     private void obtenerMateria(){
         PreparedStatement ps;

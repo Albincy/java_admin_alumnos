@@ -1,6 +1,7 @@
 package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.home.backend.home_register_back;
+import javax.swing.JOptionPane;
 
 public class home_register_profesion extends javax.swing.JPanel {
 
@@ -20,11 +21,30 @@ public class home_register_profesion extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(940, 565));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Registrar Profesión");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nombre de la Profesión:");
 
+        txt_nProfesion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        btn_register.setBackground(new java.awt.Color(33, 53, 85));
+        btn_register.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        btn_register.setForeground(new java.awt.Color(255, 255, 255));
+        btn_register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/guardar.png"))); // NOI18N
         btn_register.setText("Registrar");
+        btn_register.setBorder(null);
+        btn_register.setBorderPainted(false);
+        btn_register.setFocusPainted(false);
+        btn_register.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_registerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_registerMouseExited(evt);
+            }
+        });
         btn_register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_registerActionPerformed(evt);
@@ -36,31 +56,32 @@ public class home_register_profesion extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(198, 198, 198)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(224, 224, 224)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel2)
-                    .addComponent(txt_nProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(139, 139, 139)))
+                        .addGap(370, 370, 370)
+                        .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txt_nProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(359, 359, 359)
+                        .addComponent(jLabel1)))
                 .addContainerGap(210, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(45, 45, 45)
                 .addComponent(jLabel1)
-                .addGap(63, 63, 63)
+                .addGap(88, 88, 88)
                 .addComponent(jLabel2)
-                .addGap(28, 28, 28)
+                .addGap(29, 29, 29)
                 .addComponent(txt_nProfesion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(68, 68, 68)
                 .addComponent(btn_register, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -68,11 +89,22 @@ public class home_register_profesion extends javax.swing.JPanel {
         // registrar el dato
         home_register_back hr = new home_register_back();
         String nProfesion = txt_nProfesion.getText().toUpperCase();
-        hr.register_tbl_one(nProfesion, "TBL_SEXO", "SEXO_NOMBRE");
-
-        //reset values
-        txt_nProfesion.setText("");
+        
+        if(txt_nProfesion.getText().length() > 0){
+            hr.register_tbl_one(nProfesion, "TBL_SEXO", "SEXO_NOMBRE");
+            txt_nProfesion.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "El Campo no debe estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btn_registerActionPerformed
+
+    private void btn_registerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registerMouseEntered
+        btn_register.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_btn_registerMouseEntered
+
+    private void btn_registerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registerMouseExited
+       btn_register.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_btn_registerMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

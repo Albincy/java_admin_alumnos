@@ -44,34 +44,57 @@ public class home_register_estudiantes extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(940, 565));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("Datos de Estudiante");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Numero CUI:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+
+        txt_ncui.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         add(txt_ncui, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 310, 40));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Asignar Carrera:");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
 
+        jComboBox_carrera.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         add(jComboBox_carrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 310, 40));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Asignar Año de Carrera:");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
 
+        jComboBox_anoCarrera.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         add(jComboBox_anoCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 310, 40));
 
+        jButton1.setBackground(new java.awt.Color(33, 53, 85));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/guardar.png"))); // NOI18N
         jButton1.setText("Guardar Registro");
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, 140, 40));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, 240, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // registro
+        if(txt_ncui.getText().length() > 0){
         home_register_back hr = new home_register_back();
         hr.register_tbl_personas(home_datosPersona.persona_nombre, home_datosPersona.persona_apellidop, home_datosPersona.persona_apellidom, 
                 home_datosPersona.persona_apellidoc, home_datosPersona.persona_fechaN, home_datosPersona.persona_numeroT, 
@@ -95,8 +118,19 @@ public class home_register_estudiantes extends javax.swing.JPanel {
         home_w.jpanel_container.add(windows_rs, BorderLayout.CENTER);
         home_w.jpanel_container.revalidate();
         home_w.jpanel_container.repaint();
+        }else{
+            JOptionPane.showMessageDialog(null, "El campo CUI no debe estar vacío", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+       jButton1.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton1MouseEntered
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+        jButton1.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton1MouseExited
     
     private void obtenerID(){
         PreparedStatement ps;

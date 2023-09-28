@@ -31,17 +31,34 @@ public class home_estudiantes extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(960, 660));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Estudiantes");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
-        add(txt_estudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 67, 710, 40));
 
+        txt_estudiantes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        add(txt_estudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 67, 640, 40));
+
+        jButton1.setBackground(new java.awt.Color(33, 53, 85));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/lupa.png"))); // NOI18N
         jButton1.setText("Buscar Estudiante");
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton1MouseExited(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 70, 142, 40));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 70, 230, 40));
 
         tbl_estudiante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -53,17 +70,29 @@ public class home_estudiantes extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbl_estudiante);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 167, 887, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 887, -1));
 
-        jButton2.setText("actualizar");
+        jButton2.setBackground(new java.awt.Color(33, 53, 85));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/actualizar.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton2MouseExited(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 120, -1, 34));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 140, -1, 34));
 
         jRadioButton_inscritos.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton_inscritos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jRadioButton_inscritos.setText("Estudiantes Inscritos");
         jRadioButton_inscritos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +120,22 @@ public class home_estudiantes extends javax.swing.JPanel {
             buscarEstudiante("F_BUSCAR_ESTUDIANTE_NOI", txt_estudiantes.getText().toUpperCase());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+        jButton1.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton1MouseEntered
+
+    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
+        jButton1.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton1MouseExited
+
+    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
+        jButton2.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton2MouseEntered
+
+    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
+        jButton2.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton2MouseExited
     
     private void loadtable(String Vista){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_estudiante.getModel();

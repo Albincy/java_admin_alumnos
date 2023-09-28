@@ -41,13 +41,23 @@ public class home_materia_add extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("Añadir Materia");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Nombre Materia:");
 
+        txt_nMateria.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Asignar Carrera:");
 
+        jComboBox_carrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Año de Materia:");
+
+        jComboBox_ano_carrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jButton1.setText("Añadir Materia");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -79,16 +89,16 @@ public class home_materia_add extends javax.swing.JDialog {
                         .addGap(215, 215, 215)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
+                        .addGap(207, 207, 207)
                         .addComponent(jLabel1)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel1)
-                .addGap(34, 34, 34)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_nMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,10 +132,13 @@ public class home_materia_add extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         home_register_back hr = new home_register_back();
-        hr.register_tbl_materias(txt_nMateria.getText().toUpperCase(), carreraID_.get(jComboBox_carrera.getSelectedIndex()), anoCarreraID_.get(jComboBox_ano_carrera.getSelectedIndex()));
-        
-        JOptionPane.showMessageDialog(null, "Se añadio una materia", "Registro Materia", JOptionPane.INFORMATION_MESSAGE);
-        txt_nMateria.setText("");
+        if(txt_nMateria.getText().length() > 0){
+            hr.register_tbl_materias(txt_nMateria.getText().toUpperCase(), carreraID_.get(jComboBox_carrera.getSelectedIndex()), anoCarreraID_.get(jComboBox_ano_carrera.getSelectedIndex()));
+            JOptionPane.showMessageDialog(null, "Se añadio una materia", "Registro Materia", JOptionPane.INFORMATION_MESSAGE);
+            txt_nMateria.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "El Campo no debe estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void obtenerCarrera(){
