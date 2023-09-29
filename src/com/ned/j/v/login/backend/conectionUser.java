@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 public class conectionUser {
@@ -59,7 +60,7 @@ public class conectionUser {
             }
             
             if (!accessUser || !accessPassword){
-                System.out.println("El usuario no fue encontrado");
+                JOptionPane.showMessageDialog(null, "Usuario y la contraseña no coinciden", "Error:", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }else{
                 return true;

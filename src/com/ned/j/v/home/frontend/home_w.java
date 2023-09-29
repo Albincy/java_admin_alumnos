@@ -180,6 +180,11 @@ public class home_w extends javax.swing.JFrame {
                 jButton6MouseExited(evt);
             }
         });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jpanel_menu.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 456, 230, 41));
 
         jButton7.setBackground(new java.awt.Color(79, 112, 156));
@@ -409,6 +414,17 @@ public class home_w extends javax.swing.JFrame {
     private void jButton8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseExited
        jButton8.setBackground(new java.awt.Color(79, 112, 156));
     }//GEN-LAST:event_jButton8MouseExited
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        home_calificaciones windows_calificaciones = new home_calificaciones();
+        windows_calificaciones.setSize(940, 660);
+        windows_calificaciones.setLocation(0,0);
+        
+        jpanel_container.removeAll();
+        jpanel_container.add(windows_calificaciones, BorderLayout.CENTER);
+        jpanel_container.revalidate();
+        jpanel_container.repaint(); 
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

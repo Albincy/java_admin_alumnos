@@ -15,6 +15,7 @@ public class home_inscripciones extends javax.swing.JPanel {
 
     ArrayList<String> CicloID_ = new ArrayList<>();
     ArrayList<String> AnoCarreraID_ = new ArrayList<>();
+    String IDEstudiante = "";
     
     public home_inscripciones() {
         initComponents();
@@ -22,6 +23,7 @@ public class home_inscripciones extends javax.swing.JPanel {
         ObteneranoCarrera();
         jLabel_ano_carrera.setVisible(false);
         jComboBox_ano_Carrera.setVisible(false);
+        jButton2.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -81,6 +83,7 @@ public class home_inscripciones extends javax.swing.JPanel {
 
         jRadioButton_si.setBackground(new java.awt.Color(255, 255, 255));
         jRadioButton_si.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jRadioButton_si.setSelected(true);
         jRadioButton_si.setText("Si");
         jRadioButton_si.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +117,11 @@ public class home_inscripciones extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButton2MouseExited(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -168,10 +176,11 @@ public class home_inscripciones extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(jLabel_ano_carrera))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton_si)
-                    .addComponent(jRadioButton_no)
-                    .addComponent(jComboBox_ano_Carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox_ano_Carrera, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jRadioButton_si)
+                        .addComponent(jRadioButton_no)))
                 .addGap(31, 31, 31)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -184,13 +193,27 @@ public class home_inscripciones extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        home_register_back hr = new home_register_back();
-        buscarEstudiante(txt_cui.getText().toUpperCase());
         
-        hr.register_tbl_two(home_datosPersona.estudiante_CUI, CicloID_.get(jComboBox_ciclo.getSelectedIndex()), "TBL_INSCRIPCION", "INSCRIPCION_ESTUDIANTE", "INSCRIPCION_CICLO");
-        JOptionPane.showMessageDialog(null, "Se inscricio un estudiante", "Inscripción", JOptionPane.INFORMATION_MESSAGE);
-        
-        txt_cui.setText("");
+        if(txt_cui.getText().length() > 0){
+            if(jRadioButton_si.isSelected()){
+                home_register_back hr = new home_register_back();
+                buscarEstudiante(txt_cui.getText().toUpperCase());
+
+                hr.register_tbl_two(home_datosPersona.estudiante_CUI, CicloID_.get(jComboBox_ciclo.getSelectedIndex()), "TBL_INSCRIPCION", "INSCRIPCION_ESTUDIANTE", "INSCRIPCION_CICLO");
+                JOptionPane.showMessageDialog(null, "Se inscricio un estudiante", "Inscripción", JOptionPane.INFORMATION_MESSAGE);
+                txt_cui.setText("");
+            }
+
+            if(jRadioButton_no.isSelected()){
+                obtnerIDEstudiante(txt_cui.getText());
+                funcionUpdate(txt_cui.getText(), "ESTUDIANTE_ANO_CARRERA" ,AnoCarreraID_.get(jComboBox_ano_Carrera.getSelectedIndex()));
+                funcionUpdate_2(IDEstudiante, "INSCRIPCION_CICLO", CicloID_.get(jComboBox_ciclo.getSelectedIndex()));
+                JOptionPane.showMessageDialog(null, "Se inscricio un estudiante", "Inscripción", JOptionPane.INFORMATION_MESSAGE);
+                txt_cui.setText("");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Complete el campo CUI", "Error:", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
@@ -213,13 +236,21 @@ public class home_inscripciones extends javax.swing.JPanel {
         jRadioButton_no.setSelected(false);
         jLabel_ano_carrera.setVisible(false);
         jComboBox_ano_Carrera.setVisible(false);
+        jButton2.setVisible(false);
     }//GEN-LAST:event_jRadioButton_siActionPerformed
 
     private void jRadioButton_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_noActionPerformed
         jRadioButton_si.setSelected(false);
         jLabel_ano_carrera.setVisible(true);
         jComboBox_ano_Carrera.setVisible(true);
+        jButton2.setVisible(true);
     }//GEN-LAST:event_jRadioButton_noActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        home_datosPersona.estudiante_CUI = txt_cui.getText();
+        home_inscripciones_comprobar dialog = new home_inscripciones_comprobar(new javax.swing.JFrame(), true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void obtenerCiclo(){
         PreparedStatement ps;
@@ -292,6 +323,56 @@ public class home_inscripciones extends javax.swing.JPanel {
                  }               
                  AnoCarreraID_.add(rs.getObject(1).toString());
              }
+            
+        } catch (SQLException e) {
+             System.out.println("ERROR: " + e);
+        }
+    }
+    
+    private void funcionUpdate(String estudent, String Campo, String ano_carrera){
+        PreparedStatement ps;
+        String InsertSQL = "UPDATE TBL_ESTUDIANTE SET "+Campo+"=? WHERE ESTUDIANTE_CUI =?";
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement(InsertSQL);
+            ps.setString(1, ano_carrera);
+            ps.setString(2, estudent);
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void funcionUpdate_2(String estudent, String Campo, String ciclo){
+        PreparedStatement ps;
+        String InsertSQL = "UPDATE TBL_INSCRIPCION SET "+Campo+"=? WHERE INSCRIPCION_ESTUDIANTE =?";
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement(InsertSQL);
+            ps.setString(1, ciclo);
+            ps.setString(2, estudent);
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void obtnerIDEstudiante(String Cui){
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement("SELECT * FROM F_BUSCAR_ESTUDIANTE_CUI('"+Cui+"')");    
+            rs = ps.executeQuery();
+            
+             while(rs.next()){
+                IDEstudiante = rs.getString(1);
+             }          
             
         } catch (SQLException e) {
              System.out.println("ERROR: " + e);
