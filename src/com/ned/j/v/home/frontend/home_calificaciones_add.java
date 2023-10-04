@@ -245,7 +245,8 @@ public class home_calificaciones_add extends javax.swing.JDialog {
                     break;
                 case "Unidad II":
                     validnotaresto(IDEstudent, MateriaID_.get(jComboBox_materias.getSelectedIndex()), CicloID_.get(jComboBox_ciclos.getSelectedIndex()), "CALIFICACIONES_UNIDAD_II");                    
-                    if(NotaIngredaResto == ""){
+                    System.err.println(NotaIngredaResto);
+                    if(NotaIngredaResto.equals("0")){
                        funcionUnidadResto(IDEstudent, MateriaID_.get(jComboBox_materias.getSelectedIndex()), CicloID_.get(jComboBox_ciclos.getSelectedIndex()), nota, "CALIFICACIONES_UNIDAD_II");
                        JOptionPane.showMessageDialog(null, "Calificación ingresada", "Calificación Subida", JOptionPane.INFORMATION_MESSAGE); 
                     }else{
@@ -255,7 +256,7 @@ public class home_calificaciones_add extends javax.swing.JDialog {
                     break;
                 case "Unidad III":
                     validnotaresto(IDEstudent, MateriaID_.get(jComboBox_materias.getSelectedIndex()), CicloID_.get(jComboBox_ciclos.getSelectedIndex()), "CALIFICACIONES_UNIDAD_III");
-                    if(NotaIngredaResto == ""){
+                    if(NotaIngredaResto.equals("0")){
                         funcionUnidadResto(IDEstudent, MateriaID_.get(jComboBox_materias.getSelectedIndex()), CicloID_.get(jComboBox_ciclos.getSelectedIndex()), nota, "CALIFICACIONES_UNIDAD_III");
                         JOptionPane.showMessageDialog(null, "Calificación ingresada", "Calificación Subida", JOptionPane.INFORMATION_MESSAGE);
                     }else{
@@ -265,7 +266,7 @@ public class home_calificaciones_add extends javax.swing.JDialog {
                     break;
                 case "Unidad IV":
                     validnotaresto(IDEstudent, MateriaID_.get(jComboBox_materias.getSelectedIndex()), CicloID_.get(jComboBox_ciclos.getSelectedIndex()), "CALIFICACIONES_UNIDAD_IV");
-                    if(NotaIngredaResto == ""){
+                    if(NotaIngredaResto.equals("0")){
                         funcionUnidadResto(IDEstudent, MateriaID_.get(jComboBox_materias.getSelectedIndex()), CicloID_.get(jComboBox_ciclos.getSelectedIndex()), nota, "CALIFICACIONES_UNIDAD_IV");
                         JOptionPane.showMessageDialog(null, "Calificación ingresada", "Calificación Subida", JOptionPane.INFORMATION_MESSAGE);
                     }else{
@@ -345,7 +346,7 @@ public class home_calificaciones_add extends javax.swing.JDialog {
      }
      
      private void obtenerMateria(String ano_carrera){
-         PreparedStatement ps;
+        PreparedStatement ps;
         ResultSet rs;
         ResultSetMetaData rsmd;
         int column;

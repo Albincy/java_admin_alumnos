@@ -3,6 +3,7 @@ package com.ned.j.v.login.frontend;
 import com.ned.j.v.data.usersDT;
 import com.ned.j.v.login.backend.changewindows;
 import com.ned.j.v.login.backend.conectionUser;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 public class login_w extends javax.swing.JFrame {
@@ -16,6 +17,7 @@ public class login_w extends javax.swing.JFrame {
     public login_w() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/ned/j/v/public_proyect/icon.png")));
         txt_password.setVisible(false);
     }
 
@@ -34,9 +36,11 @@ public class login_w extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btn_view = new javax.swing.JLabel();
         txt_password_ = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("login");
+        setTitle("Iniciar Sesión");
         setMinimumSize(new java.awt.Dimension(857, 557));
 
         jPanel1.setBackground(new java.awt.Color(33, 53, 85));
@@ -96,8 +100,8 @@ public class login_w extends javax.swing.JFrame {
         jPanel1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, 230, 50));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Logo");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/logo.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/user.png"))); // NOI18N
@@ -128,6 +132,16 @@ public class login_w extends javax.swing.JFrame {
         txt_password_.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         txt_password_.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         jPanel1.add(txt_password_, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 250, 50));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("©2023 | Universidad Mariano Galvéz Zacapa");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Versión:1.0");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,6 +223,8 @@ public class login_w extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txt_password;
     private javax.swing.JPasswordField txt_password_;

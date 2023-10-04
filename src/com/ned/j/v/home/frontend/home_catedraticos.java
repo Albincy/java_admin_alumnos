@@ -1,6 +1,9 @@
 package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.data.conectionDB;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +30,7 @@ public class home_catedraticos extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_catedraticos = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(960, 660));
@@ -131,6 +135,25 @@ public class home_catedraticos extends javax.swing.JPanel {
             }
         });
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 150, -1, -1));
+
+        jButton5.setBackground(new java.awt.Color(33, 53, 85));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/copy.png"))); // NOI18N
+        jButton5.setBorderPainted(false);
+        jButton5.setFocusPainted(false);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton5MouseExited(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 150, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -185,6 +208,18 @@ public class home_catedraticos extends javax.swing.JPanel {
     private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
         jButton3.setBackground(new java.awt.Color(33, 53, 85));
     }//GEN-LAST:event_jButton3MouseExited
+
+    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
+        jButton5.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton5MouseEntered
+
+    private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
+        jButton5.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton5MouseExited
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        copiarTextoSeleccionado();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void loadtabla(String Vista){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_catedraticos.getModel();
@@ -247,11 +282,23 @@ public class home_catedraticos extends javax.swing.JPanel {
              System.out.println("ERROR: " + e);
         }
     }
+    
+    private void copiarTextoSeleccionado(){
+        int fila = tbl_catedraticos.getSelectedRow();
+        String Cui = tbl_catedraticos.getValueAt(fila, 4).toString();
+        
+        //obtener el portapapeles
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection seleccion = new StringSelection(Cui);
+        clipboard.setContents(seleccion, null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButt_catedratico;
     private javax.swing.JScrollPane jScrollPane1;

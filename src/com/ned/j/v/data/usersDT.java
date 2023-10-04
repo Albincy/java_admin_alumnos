@@ -5,4 +5,5 @@ public class usersDT {
     public static String password;
     public static String rol;
     public static String defaultD = "NINGUNO";
+    public static int Login = 0; 
 }

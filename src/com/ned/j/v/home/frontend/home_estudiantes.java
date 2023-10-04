@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 public class home_estudiantes extends javax.swing.JPanel {
 
@@ -26,6 +29,7 @@ public class home_estudiantes extends javax.swing.JPanel {
         tbl_estudiante = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jRadioButton_inscritos = new javax.swing.JRadioButton();
+        jButton3 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(960, 660));
@@ -67,7 +71,22 @@ public class home_estudiantes extends javax.swing.JPanel {
             new String [] {
                 "Nombres", "Apellido Paterno", "Apellido Materno", "CUI", "Correo", "Numero Telefono", "Sexo", "Profesión", "Carrera", "Año Carrera", "Ciclo"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbl_estudiante);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 887, -1));
@@ -100,6 +119,25 @@ public class home_estudiantes extends javax.swing.JPanel {
             }
         });
         add(jRadioButton_inscritos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(33, 53, 85));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/copy.png"))); // NOI18N
+        jButton3.setBorderPainted(false);
+        jButton3.setFocusPainted(false);
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton3MouseExited(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 140, 60, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -136,6 +174,18 @@ public class home_estudiantes extends javax.swing.JPanel {
     private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
         jButton2.setBackground(new java.awt.Color(33, 53, 85));
     }//GEN-LAST:event_jButton2MouseExited
+
+    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
+        jButton3.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton3MouseEntered
+
+    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
+        jButton3.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton3MouseExited
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        copiarTextoSeleccionado();
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     private void loadtable(String Vista){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_estudiante.getModel();
@@ -207,9 +257,20 @@ public class home_estudiantes extends javax.swing.JPanel {
         }
     }
     
+    private void copiarTextoSeleccionado(){
+        int fila = tbl_estudiante.getSelectedRow();
+        String Cui = tbl_estudiante.getValueAt(fila, 3).toString();
+        
+        //obtener el portapapeles
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection seleccion = new StringSelection(Cui);
+        clipboard.setContents(seleccion, null);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton_inscritos;
     private javax.swing.JScrollPane jScrollPane1;

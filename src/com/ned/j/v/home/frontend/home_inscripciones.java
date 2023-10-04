@@ -247,9 +247,11 @@ public class home_inscripciones extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton_noActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        home_datosPersona.estudiante_CUI = txt_cui.getText();
-        home_inscripciones_comprobar dialog = new home_inscripciones_comprobar(new javax.swing.JFrame(), true);
-        dialog.setVisible(true);
+       if(txt_cui.getText().length() > 0){
+           home_datosPersona.estudiante_CUI = txt_cui.getText();
+           home_inscripciones_comprobar dialog = new home_inscripciones_comprobar(new javax.swing.JFrame(), true);
+           dialog.setVisible(true);
+       }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void obtenerCiclo(){

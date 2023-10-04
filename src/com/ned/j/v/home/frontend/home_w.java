@@ -2,12 +2,14 @@ package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.data.usersDT;
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 
 public class home_w extends javax.swing.JFrame {
 
     public home_w() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/ned/j/v/public_proyect/icon.png")));
         String user = usersDT.userName;
         label_username.setText(user);
     }
@@ -34,6 +36,7 @@ public class home_w extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Adminitración de Alumnos");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpanel_menu.setBackground(new java.awt.Color(33, 53, 85));
@@ -404,7 +407,14 @@ public class home_w extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7MouseExited
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        home_ajustes windows_ajustes = new home_ajustes();
+        windows_ajustes.setSize(940, 660);
+        windows_ajustes.setLocation(0,0);
+        
+        jpanel_container.removeAll();
+        jpanel_container.add(windows_ajustes, BorderLayout.CENTER);
+        jpanel_container.revalidate();
+        jpanel_container.repaint(); 
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
