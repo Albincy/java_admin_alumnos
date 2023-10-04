@@ -251,7 +251,7 @@ public class home_w extends javax.swing.JFrame {
         jLabel2.setText("Pantalla de Inicio");
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel1.setText("Versión: 1.0");
+        jLabel1.setText("Versión: 1.0.0");
 
         javax.swing.GroupLayout jpanel_containerLayout = new javax.swing.GroupLayout(jpanel_container);
         jpanel_container.setLayout(jpanel_containerLayout);
@@ -259,10 +259,12 @@ public class home_w extends javax.swing.JFrame {
             jpanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanel_containerLayout.createSequentialGroup()
                 .addGap(380, 380, 380)
-                .addComponent(jLabel2))
-            .addGroup(jpanel_containerLayout.createSequentialGroup()
-                .addGap(860, 860, 860)
-                .addComponent(jLabel1))
+                .addComponent(jLabel2)
+                .addGap(372, 372, 372))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanel_containerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(48, 48, 48))
         );
         jpanel_containerLayout.setVerticalGroup(
             jpanel_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
