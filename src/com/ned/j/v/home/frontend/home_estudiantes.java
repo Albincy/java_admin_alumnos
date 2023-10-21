@@ -10,12 +10,17 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.util.ArrayList;
 
 public class home_estudiantes extends javax.swing.JPanel {
-
+    
+    ArrayList<String> CarreraID_ = new ArrayList<>();
+    
     public home_estudiantes() {
         initComponents();
         mostrartabla();
+        obtenerCarrera();
+        jComboBox_carrera.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -30,6 +35,8 @@ public class home_estudiantes extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jRadioButton_inscritos = new javax.swing.JRadioButton();
         jButton3 = new javax.swing.JButton();
+        jRadio_carrera = new javax.swing.JRadioButton();
+        jComboBox_carrera = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(960, 660));
@@ -69,7 +76,7 @@ public class home_estudiantes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nombres", "Apellido Paterno", "Apellido Materno", "CUI", "Correo", "Numero Telefono", "Sexo", "Profesión", "Carrera", "Año Carrera", "Ciclo"
+                "Nombres", "Apellido Paterno", "Apellido Materno", "CUI", "Codigo Estudiante", "Correo", "Numero Telefono", "Sexo", "Carrera", "Año Carrera", "Ciclo"
             }
         ) {
             Class[] types = new Class [] {
@@ -138,11 +145,32 @@ public class home_estudiantes extends javax.swing.JPanel {
             }
         });
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 140, 60, -1));
+
+        jRadio_carrera.setBackground(new java.awt.Color(255, 255, 255));
+        jRadio_carrera.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jRadio_carrera.setText("Carrera");
+        jRadio_carrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadio_carreraActionPerformed(evt);
+            }
+        });
+        add(jRadio_carrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, -1));
+
+        jComboBox_carrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        add(jComboBox_carrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 180, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // actualizar
-        mostrartabla();
+        if(jRadio_carrera.isSelected()){
+            if(jRadioButton_inscritos.isSelected()){
+                buscarEstudiante_has_carrera("F_BUSCAR_ESTUDIANTE_SII_HAS_CARRERA", CarreraID_.get(jComboBox_carrera.getSelectedIndex()));
+            }else{
+                buscarEstudiante_has_carrera("F_BUSCAR_ESTUDIANTE_NOI_HAS_CARRERA", CarreraID_.get(jComboBox_carrera.getSelectedIndex()));
+            }
+        }else{
+            // actualizar
+            mostrartabla();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton_inscritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_inscritosActionPerformed
@@ -156,7 +184,7 @@ public class home_estudiantes extends javax.swing.JPanel {
             buscarEstudiante("F_BUSCAR_ESTUDIANTE_SII", txt_estudiantes.getText().toUpperCase());
         }else{
             buscarEstudiante("F_BUSCAR_ESTUDIANTE_NOI", txt_estudiantes.getText().toUpperCase());
-        }
+        }      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
@@ -186,6 +214,14 @@ public class home_estudiantes extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         copiarTextoSeleccionado();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jRadio_carreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadio_carreraActionPerformed
+       if(jRadio_carrera.isSelected()){
+            jComboBox_carrera.setVisible(true);
+        }else{
+            jComboBox_carrera.setVisible(false);
+        }
+    }//GEN-LAST:event_jRadio_carreraActionPerformed
     
     private void loadtable(String Vista){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_estudiante.getModel();
@@ -226,6 +262,7 @@ public class home_estudiantes extends javax.swing.JPanel {
         }
     }
     
+    
     private void buscarEstudiante(String sql, String cui){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_estudiante.getModel();
         modeloTable.setRowCount(0);
@@ -257,6 +294,65 @@ public class home_estudiantes extends javax.swing.JPanel {
         }
     }
     
+    private void buscarEstudiante_has_carrera(String sql, String carrera){
+        DefaultTableModel modeloTable = (DefaultTableModel) tbl_estudiante.getModel();
+        modeloTable.setRowCount(0);
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int column;
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement("SELECT * FROM "+sql+"('"+carrera+"')");    
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            column = rsmd.getColumnCount();
+            
+             while(rs.next()){
+                int cont = 1;
+                Object[] fila = new Object[column];
+                for(int i=0; i<column; i++){
+                    fila[i] = rs.getObject(cont);
+                    cont ++;
+                } 
+                modeloTable.addRow(fila);
+             }
+            
+        } catch (SQLException e) {
+             System.out.println("ERROR: " + e);
+        }
+    }
+    
+    private void obtenerCarrera(){
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int column;
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement("SELECT * FROM TBL_CARRERA");    
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            column = rsmd.getColumnCount();
+            
+             while(rs.next()){
+                Object[] carrera_ = new Object[column];
+                
+                 for(int i=1; i<2; i++){
+                     carrera_[i] = rs.getObject(i+1);
+                     jComboBox_carrera.addItem(carrera_[i].toString());
+                 }               
+                 CarreraID_.add(rs.getObject(1).toString());
+             }
+            
+        } catch (SQLException e) {
+             System.out.println("ERROR: " + e);
+        }
+    }
+    
     private void copiarTextoSeleccionado(){
         int fila = tbl_estudiante.getSelectedRow();
         String Cui = tbl_estudiante.getValueAt(fila, 3).toString();
@@ -271,8 +367,10 @@ public class home_estudiantes extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox_carrera;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButton_inscritos;
+    private javax.swing.JRadioButton jRadio_carrera;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_estudiante;
     private javax.swing.JTextField txt_estudiantes;

@@ -1,17 +1,23 @@
 package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.data.conectionDB;
+import com.ned.j.v.home.backend.home_datosEdit;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class home_calificaciones extends javax.swing.JPanel {
 
      ArrayList<String> CiclosID_ = new ArrayList<>();
+     boolean busqueda = false;
     
     public home_calificaciones() {
         initComponents();
@@ -34,6 +40,9 @@ public class home_calificaciones extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jRadioButton_ciclos = new javax.swing.JRadioButton();
         jComboBox_ciclos = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(940, 660));
@@ -142,10 +151,69 @@ public class home_calificaciones extends javax.swing.JPanel {
 
         jComboBox_ciclos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         add(jComboBox_ciclos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 180, -1));
+
+        jButton4.setBackground(new java.awt.Color(33, 53, 85));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/copy.png"))); // NOI18N
+        jButton4.setBorder(null);
+        jButton4.setBorderPainted(false);
+        jButton4.setFocusPainted(false);
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton4MouseExited(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 129, 60, 32));
+
+        jButton5.setBackground(new java.awt.Color(33, 53, 85));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/editar.png"))); // NOI18N
+        jButton5.setBorderPainted(false);
+        jButton5.setFocusPainted(false);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton5MouseExited(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 129, -1, -1));
+
+        jButton6.setBackground(new java.awt.Color(33, 53, 85));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/imprimir.png"))); // NOI18N
+        jButton6.setBorderPainted(false);
+        jButton6.setFocusPainted(false);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton6MouseExited(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         loadtable();
+        busqueda = false;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
@@ -181,8 +249,10 @@ public class home_calificaciones extends javax.swing.JPanel {
         //LLAMAR A LA FUNCION BUSQUEDA
         if(jRadioButton_ciclos.isSelected()){
             buscarNotaCiclo(txt_calificaiones_cui.getText().toUpperCase(), CiclosID_.get(jComboBox_ciclos.getSelectedIndex()));
+            busqueda = true;
         }else{
             buscarNota(txt_calificaiones_cui.getText().toUpperCase());
+            busqueda = false;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -193,6 +263,46 @@ public class home_calificaciones extends javax.swing.JPanel {
             jComboBox_ciclos.setVisible(false);
         }
     }//GEN-LAST:event_jRadioButton_ciclosActionPerformed
+
+    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
+        jButton4.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton4MouseEntered
+
+    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
+        jButton4.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton4MouseExited
+
+    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
+        jButton5.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton5MouseEntered
+
+    private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
+        jButton5.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton5MouseExited
+
+    private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
+       jButton6.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton6MouseEntered
+
+    private void jButton6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseExited
+       jButton6.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton6MouseExited
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       copiarTextoSeleccionado();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        editCalificacion();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if(busqueda){
+             JOptionPane.showMessageDialog(null, "Esta función se encuentra en desarrollo", "Upss!", JOptionPane.QUESTION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Realice una busqueda, de las calificaciones de un estudiante", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
     
     private void loadtable(){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_calificaiones.getModel();
@@ -320,12 +430,36 @@ public class home_calificaciones extends javax.swing.JPanel {
              System.out.println("ERROR: " + e);
         }
     }
+    
+    private void copiarTextoSeleccionado(){
+        int fila = tbl_calificaiones.getSelectedRow();
+        String Cui = tbl_calificaiones.getValueAt(fila, 0).toString();
+        
+        //obtener el portapapeles
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        StringSelection seleccion = new StringSelection(Cui);
+        clipboard.setContents(seleccion, null);
+    }
+    
+    private void editCalificacion(){
+        int fila = tbl_calificaiones.getSelectedRow();
+        if (fila < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione una calificación", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else{
+            home_datosEdit.calificaiones_estudiante = tbl_calificaiones.getValueAt(fila, 0).toString();
+            home_calificaciones_edit dialog = new home_calificaciones_edit(new javax.swing.JFrame(), true);
+            dialog.setVisible(true);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Carreras;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox_ciclos;
     private javax.swing.JRadioButton jRadioButton_ciclos;
     private javax.swing.JScrollPane jScrollPane1;

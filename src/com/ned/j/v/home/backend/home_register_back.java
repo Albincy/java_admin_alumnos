@@ -75,11 +75,11 @@ public class home_register_back {
         }
     }
     
-    public void register_tbl_estudiante(String cui, String persona, String carrera, String ano_carrera){
+    public void register_tbl_estudiante(String cui, String codEstd, String persona, String carrera, String ano_carrera){
         PreparedStatement ps;
         ResultSet rs;
-        String InsertSQL = "INSERT INTO TBL_ESTUDIANTE (ESTUDIANTE_CUI, ESTUDIANTE_PERSONA, ESTUDIANTE_CARRERA, ESTUDIANTE_ANO_CARRERA)"
-                + " VALUES ('"+cui+"', '"+persona+"', '"+carrera+"', '"+ano_carrera+"')";
+        String InsertSQL = "INSERT INTO TBL_ESTUDIANTE (ESTUDIANTE_CUI, ESTUDIANTE_COD_EST, ESTUDIANTE_PERSONA, ESTUDIANTE_CARRERA, ESTUDIANTE_ANO_CARRERA)"
+                + " VALUES ('"+cui+"', '"+codEstd+"', '"+persona+"', '"+carrera+"', '"+ano_carrera+"')";
         
         try {
             Connection connection_ = conectionDB.getConnection();

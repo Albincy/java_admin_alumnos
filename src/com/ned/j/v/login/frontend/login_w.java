@@ -135,12 +135,12 @@ public class login_w extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("©2023 | Universidad Mariano Galvéz Zacapa");
+        jLabel6.setText("©2023 | Grupo#2");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Versión: 1.0.0");
+        jLabel7.setText("Versión: 1.1.0");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -21,7 +21,7 @@ public class home_ajustes extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Versión: 1.0.0");
+        jLabel1.setText("Versión: 1.1.0");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 634, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

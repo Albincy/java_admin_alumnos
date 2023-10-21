@@ -1,6 +1,7 @@
 package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.data.conectionDB;
+import com.ned.j.v.home.backend.home_datosEdit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,14 +29,19 @@ public class home_carrera extends javax.swing.JPanel {
         tbl_carreras = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(940, 660));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Carreras.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         Carreras.setText("Carreras");
+        add(Carreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 26, -1, -1));
 
         txt_searchCarrera.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        add(txt_searchCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 73, 450, 36));
 
         jButton1.setBackground(new java.awt.Color(33, 53, 85));
         jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -57,6 +63,7 @@ public class home_carrera extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(511, 73, 202, 36));
 
         jButton2.setBackground(new java.awt.Color(33, 53, 85));
         jButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -78,6 +85,7 @@ public class home_carrera extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 74, 224, 34));
 
         tbl_carreras.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbl_carreras.setModel(new javax.swing.table.DefaultTableModel(
@@ -85,11 +93,11 @@ public class home_carrera extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Carrera", "Fecha", "Estado"
+                "ID", "Carrera", "Fecha"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -104,6 +112,8 @@ public class home_carrera extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tbl_carreras);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 156, 827, -1));
 
         jButton3.setBackground(new java.awt.Color(33, 53, 85));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/actualizar.png"))); // NOI18N
@@ -122,6 +132,7 @@ public class home_carrera extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(888, 156, -1, -1));
 
         jButton4.setBackground(new java.awt.Color(33, 53, 85));
         jButton4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -143,49 +154,45 @@ public class home_carrera extends javax.swing.JPanel {
                 jButton4ActionPerformed(evt);
             }
         });
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(683, 19, -1, 36));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_searchCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Carreras)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Carreras)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_searchCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
+        jButton6.setBackground(new java.awt.Color(33, 53, 85));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/editar.png"))); // NOI18N
+        jButton6.setBorderPainted(false);
+        jButton6.setFocusPainted(false);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton6MouseExited(evt);
+            }
+        });
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(888, 210, -1, -1));
+
+        jButton7.setBackground(new java.awt.Color(33, 53, 85));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/basura.png"))); // NOI18N
+        jButton7.setBorderPainted(false);
+        jButton7.setFocusPainted(false);
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton7MouseExited(evt);
+            }
+        });
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(888, 260, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -241,6 +248,30 @@ public class home_carrera extends javax.swing.JPanel {
     private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
         jButton3.setBackground(new java.awt.Color(33, 53, 85));
     }//GEN-LAST:event_jButton3MouseExited
+
+    private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
+       jButton6.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton6MouseEntered
+
+    private void jButton6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseExited
+       jButton6.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton6MouseExited
+
+    private void jButton7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseEntered
+        jButton7.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton7MouseEntered
+
+    private void jButton7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseExited
+        jButton7.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton7MouseExited
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+       eliminarCarrera();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       editarMateria();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void loadcarrera(){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_carreras.getModel();
@@ -303,6 +334,39 @@ public class home_carrera extends javax.swing.JPanel {
              System.out.println("ERROR: " + e);
         }
     }
+    
+    private void editarMateria(){
+        int fila = tbl_carreras.getSelectedRow();
+        if (fila < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione una carrera", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else{
+            home_datosEdit.carrera_id = tbl_carreras.getValueAt(fila, 0).toString();
+            home_datosEdit.carrera_nombre = tbl_carreras.getValueAt(fila, 1).toString();
+            home_carrera_edit dialog = new home_carrera_edit(new javax.swing.JFrame(), true);
+            dialog.setVisible(true);
+        }
+    }
+    
+    private void eliminarCarrera(){
+        int fila = tbl_carreras.getSelectedRow();
+        if (fila < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione una carrera", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else{
+           String id = tbl_carreras.getValueAt(fila, 0).toString();
+           PreparedStatement ps;
+           String InsertSQL = "UPDATE TBL_CARRERA SET CARRERA_ESTATUS = 0 WHERE CARRERA_COD =?";
+           
+            try {
+                Connection connection_ = conectionDB.getConnection();
+                ps = connection_.prepareStatement(InsertSQL);
+                ps.setString(1, id);
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Carrera Eliminada", "Completado!", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Carreras;
@@ -310,6 +374,8 @@ public class home_carrera extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_carreras;
     private javax.swing.JTextField txt_searchCarrera;

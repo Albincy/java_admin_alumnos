@@ -102,11 +102,11 @@ public class home_catedraticos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nombres", "Apellido Paterno", "Apellido Materno", "Apellido Casad@", "DPI", "Fecha Nacimiento", "Correo Electronico", "Numero Telefono", "Sexo", "Profesión", "Materia", "Ciclo"
+                "Nombres", "Apellido Paterno", "Apellido Materno", "Apellido Casad@", "DPI", "Correo Electronico", "Numero Telefono", "Sexo", "Materia", "Ciclo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -297,7 +297,6 @@ public class home_catedraticos extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton jRadioButt_catedratico;

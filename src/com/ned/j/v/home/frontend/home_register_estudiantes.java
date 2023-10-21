@@ -37,6 +37,8 @@ public class home_register_estudiantes extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jComboBox_anoCarrera = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txt_codEstd = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
 
@@ -46,28 +48,28 @@ public class home_register_estudiantes extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setText("Datos de Estudiante");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Numero CUI:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
 
         txt_ncui.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        add(txt_ncui, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 310, 40));
+        add(txt_ncui, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 310, 40));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Asignar Carrera:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, -1));
 
         jComboBox_carrera.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        add(jComboBox_carrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 310, 40));
+        add(jComboBox_carrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 310, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Asignar Año de Carrera:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
 
         jComboBox_anoCarrera.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        add(jComboBox_anoCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 310, 40));
+        add(jComboBox_anoCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 310, 40));
 
         jButton1.setBackground(new java.awt.Color(33, 53, 85));
         jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -89,7 +91,14 @@ public class home_register_estudiantes extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, 240, 60));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 240, 60));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Codigo Estudiante:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
+
+        txt_codEstd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        add(txt_codEstd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 310, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -104,7 +113,7 @@ public class home_register_estudiantes extends javax.swing.JPanel {
         obtenerID();
         
         //Guardamos estudiante
-        hr.register_tbl_estudiante(txt_ncui.getText().toUpperCase(), Id_persona, CarreraID_.get(jComboBox_carrera.getSelectedIndex()) 
+        hr.register_tbl_estudiante(txt_ncui.getText().toUpperCase(), txt_codEstd.getText().toUpperCase(), Id_persona, CarreraID_.get(jComboBox_carrera.getSelectedIndex()) 
                 , anoCarreraID_.get(jComboBox_anoCarrera.getSelectedIndex()));
        
         JOptionPane.showMessageDialog(null, "Se registro un estudiante", "Registro Estudiante", JOptionPane.INFORMATION_MESSAGE);
@@ -216,6 +225,8 @@ public class home_register_estudiantes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField txt_codEstd;
     private javax.swing.JTextField txt_ncui;
     // End of variables declaration//GEN-END:variables
 }

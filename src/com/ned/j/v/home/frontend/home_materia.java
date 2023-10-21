@@ -1,11 +1,13 @@
 package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.data.conectionDB;
+import com.ned.j.v.home.backend.home_datosEdit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class home_materia extends javax.swing.JPanel {
@@ -26,6 +28,8 @@ public class home_materia extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_materias = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(940, 660));
@@ -87,9 +91,17 @@ public class home_materia extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nombre Materia", "Carrera", "año Carrera", "Fecha", "Estatus"
+                "ID", "Nombre Materia", "Carrera", "año Carrera", "Fecha"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbl_materias);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 810, 460));
@@ -112,6 +124,44 @@ public class home_materia extends javax.swing.JPanel {
             }
         });
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, -1, -1));
+
+        jButton4.setBackground(new java.awt.Color(33, 53, 85));
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/editar.png"))); // NOI18N
+        jButton4.setBorderPainted(false);
+        jButton4.setFocusPainted(false);
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton4MouseExited(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 200, -1, -1));
+
+        jButton5.setBackground(new java.awt.Color(33, 53, 85));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/basura.png"))); // NOI18N
+        jButton5.setBorderPainted(false);
+        jButton5.setFocusPainted(false);
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton5MouseExited(evt);
+            }
+        });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 250, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -153,6 +203,30 @@ public class home_materia extends javax.swing.JPanel {
     private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
          jButton3.setBackground(new java.awt.Color(33, 53, 85));
     }//GEN-LAST:event_jButton3MouseExited
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       editarMateria();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
+        jButton4.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton4MouseEntered
+
+    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
+        jButton4.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton4MouseExited
+
+    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
+       jButton5.setBackground(new java.awt.Color(79, 112, 156));
+    }//GEN-LAST:event_jButton5MouseEntered
+
+    private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
+       jButton5.setBackground(new java.awt.Color(33, 53, 85));
+    }//GEN-LAST:event_jButton5MouseExited
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        eliminarMateria();
+    }//GEN-LAST:event_jButton5ActionPerformed
     
     private void loadmateria(){
         DefaultTableModel modeloTable = (DefaultTableModel) tbl_materias.getModel();
@@ -215,11 +289,46 @@ public class home_materia extends javax.swing.JPanel {
              System.out.println("ERROR: " + e);
         }
     }
+    
+    private void editarMateria(){
+        int fila = tbl_materias.getSelectedRow();
+        if (fila < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione una materia", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else{
+            home_datosEdit.materia_id = tbl_materias.getValueAt(fila, 0).toString();
+            home_datosEdit.materia_nombre = tbl_materias.getValueAt(fila, 1).toString();
+            home_materia_edit dialog = new home_materia_edit(new javax.swing.JFrame(), true);
+            dialog.setVisible(true);
+        }
+    }
+    
+    private void eliminarMateria(){
+        int fila = tbl_materias.getSelectedRow();
+        if (fila < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione una materia", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else{
+           String id = tbl_materias.getValueAt(fila, 0).toString();
+           PreparedStatement ps;
+           String InsertSQL = "UPDATE TBL_MATERIAS SET MATERIAS_ESTATUS = 0 WHERE MATERIAS_COD =?";
+           
+            try {
+                Connection connection_ = conectionDB.getConnection();
+                ps = connection_.prepareStatement(InsertSQL);
+                ps.setString(1, id);
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Materia Eliminada", "Completado!", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_materias;
