@@ -333,7 +333,7 @@ public class home_estudiantes extends javax.swing.JPanel {
         
         try {
             Connection connection_ = conectionDB.getConnection();
-            ps = connection_.prepareStatement("SELECT * FROM TBL_CARRERA");    
+            ps = connection_.prepareStatement("SELECT * FROM TBL_CARRERA WHERE CARRERA_ESTATUS = '1'");    
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             column = rsmd.getColumnCount();

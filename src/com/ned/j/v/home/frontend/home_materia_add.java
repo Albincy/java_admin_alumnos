@@ -174,7 +174,7 @@ public class home_materia_add extends javax.swing.JDialog {
         
         try {
             Connection connection_ = conectionDB.getConnection();
-            ps = connection_.prepareStatement("SELECT * FROM TBL_CARRERA");    
+            ps = connection_.prepareStatement("SELECT * FROM TBL_CARRERA WHERE CARRERA_ESTATUS = '1'");    
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             column = rsmd.getColumnCount();
@@ -202,7 +202,7 @@ public class home_materia_add extends javax.swing.JDialog {
         
         try {
             Connection connection_ = conectionDB.getConnection();
-            ps = connection_.prepareStatement("SELECT * FROM TBL_ANO_CARRERA");    
+            ps = connection_.prepareStatement("SELECT * FROM TBL_ANO_CARRERA WHERE ANO_CARRERA_ESTATUS = '1'");    
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             column = rsmd.getColumnCount();

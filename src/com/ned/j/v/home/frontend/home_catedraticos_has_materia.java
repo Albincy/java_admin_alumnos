@@ -176,7 +176,7 @@ public class home_catedraticos_has_materia extends javax.swing.JDialog {
         
         try {
             Connection connection_ = conectionDB.getConnection();
-            ps = connection_.prepareStatement("SELECT * FROM TBL_MATERIAS");    
+            ps = connection_.prepareStatement("SELECT * FROM TBL_MATERIAS WHERE MATERIAS_ESTATUS = '1'");    
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             column = rsmd.getColumnCount();

@@ -1,15 +1,32 @@
 package com.ned.j.v.home.frontend;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.ned.j.v.data.conectionDB;
 import com.ned.j.v.home.backend.home_datosEdit;
+import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +35,9 @@ public class home_calificaciones extends javax.swing.JPanel {
 
      ArrayList<String> CiclosID_ = new ArrayList<>();
      boolean busqueda = false;
+     String IDEstudent = "";
+     String CarreraEstudent = "";
+     String AnoCarreraEstudent = "";
     
     public home_calificaciones() {
         initComponents();
@@ -298,9 +318,182 @@ public class home_calificaciones extends javax.swing.JPanel {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if(busqueda){
-             JOptionPane.showMessageDialog(null, "Esta función se encuentra en desarrollo", "Upss!", JOptionPane.QUESTION_MESSAGE);
+            Document doc = new Document();
+            LocalDate fecha = LocalDate.now();
+            
+            String cui = tbl_calificaiones.getValueAt(0,0).toString();
+            String nameC = tbl_calificaiones.getValueAt(0,1).toString();
+            String last_name = tbl_calificaiones.getValueAt(0, 2).toString();
+            String last_name_2 = tbl_calificaiones.getValueAt(0, 3).toString();
+            String ciclo = tbl_calificaiones.getValueAt(0, 5).toString();
+            int nameind = nameC.indexOf(" ");
+            String name = "";
+            
+            obtenerIDEstudent(cui);
+            obtenerCarra_and_ano(IDEstudent, cui, CiclosID_.get(jComboBox_ciclos.getSelectedIndex()));
+            
+            
+            if(nameind != -1){
+                name = nameC.substring(0, nameind);
+            }else{
+                name = nameC;
+            }
+            
+            try {
+                PdfWriter.getInstance(doc, new FileOutputStream("src/docts/" + name.trim() + "_" + last_name.trim() + "_" + ciclo + ".pdf"));
+                doc.open();
+                
+                Image header = Image.getInstance("src/imge/lgIns.jpg");
+                header.scaleToFit(138, 138);
+                header.setAlignment(Chunk.ALIGN_CENTER);
+                
+                Paragraph title = new Paragraph();
+                title.setAlignment(Paragraph.ALIGN_CENTER);
+                title.setFont(FontFactory.getFont("Tahoma", 19, Font.BOLD, BaseColor.BLACK));
+                title.add("\n \n Boleta de Registro de notas \n \n \n \n");
+
+                
+                Paragraph data = new Paragraph();
+                data.setAlignment(Paragraph.ALIGN_LEFT);
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("Nombre del estudiante:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add(nameC + " " + last_name + " " + last_name_2 + "\n \n");
+
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("CUI del estudiante:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add(cui + "   ");
+                
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("Grado:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add(AnoCarreraEstudent + "   ");
+                
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("Ciclo:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add(ciclo + "\n \n");
+                
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("Carrera:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add(CarreraEstudent + "\n \n");
+                
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("Centro educativo:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add("INSTITUTO NACIONAL DE EDUCATIVO DIVERSIFICADA \n \n");
+                
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("Dirección del centro educativo:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add("BARRIO NUEVO \n \n");
+                 
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("Municipio:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add("LA UNION     ");
+                
+                data.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                data.add("Departamento:     ");
+                data.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                data.add("ZACAPA \n \n \n");
+                
+                Paragraph dt = new Paragraph();
+                int year = fecha.getYear();
+                int month = fecha.getMonthValue();
+                int day = fecha.getDayOfMonth();
+                
+                dt.setAlignment(Paragraph.ALIGN_JUSTIFIED);
+                dt.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+                dt.add("\n \n Lugar y fecha:     ");
+                dt.setFont(FontFactory.getFont("Tahoma", 10, Font.NORMAL, BaseColor.BLACK));
+                dt.add("BARRIO NUEVO, LA UNION, ZACAPA, " + day + " " + month + " " + year);
+                
+                doc.add(header);
+                doc.add(title);
+                doc.add(data);
+                
+                PdfPTable tabla_notas = new PdfPTable(6);
+                tabla_notas.setWidthPercentage(100);
+                Font smallFont = new Font(Font.FontFamily.HELVETICA, 10);
+                Font smallFontCont = new Font(Font.FontFamily.HELVETICA, 8);
+                
+                String[] cellContents = {
+                    "Asignatura 0 Áreas curriculares",
+                    "Unidad I",
+                    "Unidad II",
+                    "Unidad III",
+                    "Unidad IV",
+                    "Promedio"
+                };
+                
+                for (String content : cellContents){
+                    PdfPCell cell = new PdfPCell(new Phrase(content, smallFont));
+                    cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+                    cell.setVerticalAlignment(PdfPCell.ALIGN_MIDDLE);
+                    cell.setNoWrap(false);
+                    cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                    tabla_notas.addCell(cell);
+                }
+                     
+                //recorrer tabla
+                int cont =  tbl_calificaiones.getRowCount();
+                
+                for(int i=0; i<cont; i++){
+                    PdfPCell cell1 = new PdfPCell(new Phrase(tbl_calificaiones.getValueAt(i, 4).toString(), smallFontCont));
+                    PdfPCell cell2 = new PdfPCell(new Phrase(tbl_calificaiones.getValueAt(i, 6).toString(), smallFontCont));
+                    PdfPCell cell3 = new PdfPCell(new Phrase(tbl_calificaiones.getValueAt(i, 7).toString(), smallFontCont));
+                    PdfPCell cell4 = new PdfPCell(new Phrase(tbl_calificaiones.getValueAt(i, 8).toString(), smallFontCont));
+                    PdfPCell cell5 = new PdfPCell(new Phrase(tbl_calificaiones.getValueAt(i, 9).toString(), smallFontCont));
+                    PdfPCell cell6 = new PdfPCell(new Phrase(tbl_calificaiones.getValueAt(i, 10).toString(), smallFontCont));
+                    
+                    cell2.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+                    cell2.setVerticalAlignment(PdfPCell.ALIGN_MIDDLE);
+                    cell3.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+                    cell3.setVerticalAlignment(PdfPCell.ALIGN_MIDDLE);
+                    cell4.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+                    cell4.setVerticalAlignment(PdfPCell.ALIGN_MIDDLE);
+                    cell5.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+                    cell5.setVerticalAlignment(PdfPCell.ALIGN_MIDDLE);
+                    cell6.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+                    cell6.setVerticalAlignment(PdfPCell.ALIGN_MIDDLE);
+                    
+                    tabla_notas.addCell(cell1);
+                    tabla_notas.addCell(cell2);
+                    tabla_notas.addCell(cell3);
+                    tabla_notas.addCell(cell4);
+                    tabla_notas.addCell(cell5);
+                    tabla_notas.addCell(cell6);
+                }
+                
+                doc.add(tabla_notas);
+                doc.add(dt);
+                doc.close();
+                JOptionPane.showMessageDialog(null, "Se generó un informe de calificaciones", "Completado!", JOptionPane.INFORMATION_MESSAGE);
+                
+                //abrir el PDF
+                String filePath = "src/docts/" + name.trim() + "_" + last_name.trim() + "_" + ciclo + ".pdf";
+                File pdfFile = new File(filePath);
+                
+                if(Desktop.isDesktopSupported() && pdfFile.exists()){
+                    try {
+                        Desktop.getDesktop().open(pdfFile);
+                    } catch (IOException e) {
+                         e.printStackTrace();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "PDF no encontrado o operación incompatible", "Error!", JOptionPane.ERROR_MESSAGE);
+                }       
+                        
+            } catch (DocumentException | IOException e) {
+                System.err.println("Error en PDF o ruta de Imagen " + e);
+                JOptionPane.showMessageDialog(null, "No se puedo generar el informe", "Error!", JOptionPane.ERROR_MESSAGE);
+            }
+             
         }else{
-            JOptionPane.showMessageDialog(null, "Realice una busqueda, de las calificaciones de un estudiante", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Realice una busqueda de las calificaciones de un estudiante con Ciclo", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
     
@@ -449,6 +642,58 @@ public class home_calificaciones extends javax.swing.JPanel {
             home_datosEdit.calificaiones_estudiante = tbl_calificaiones.getValueAt(fila, 0).toString();
             home_calificaciones_edit dialog = new home_calificaciones_edit(new javax.swing.JFrame(), true);
             dialog.setVisible(true);
+        }
+    }
+    
+    private void obtenerIDEstudent(String Cui){
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement("SELECT ESTUDIANTE_COD FROM TBL_ESTUDIANTE WHERE ESTUDIANTE_CUI = '"+Cui+"'");    
+            rs = ps.executeQuery();
+            
+             while(rs.next()){
+                IDEstudent = rs.getString(1);
+             }          
+            
+        } catch (SQLException e) {
+             System.out.println("ERROR: " + e);
+        }
+     }
+    
+    private void obtenerCarra_and_ano(String cod, String Cui, String ciclo){
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement("SELECT CARRERA_NOMBRE FROM TBL_ESTUDIANTE, TBL_CARRERA " + 
+                                                "WHERE ESTUDIANTE_CARRERA = CARRERA_COD AND ESTUDIANTE_COD = '"+cod+"'");    
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                CarreraEstudent = rs.getString(1);
+            }          
+            
+        } catch (SQLException e) {
+             System.out.println("ERROR: " + e);
+        }
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement("SELECT ANO_CARRERA_NOMBRE FROM TBL_CALIFICACIONES, TBL_ESTUDIANTE, TBL_CICLOS, TBL_ANO_CARRERA " + 
+                                             "WHERE CALIFICACIONES_ESTUDIANTE = ESTUDIANTE_COD AND CALIFICACIONES_CICLO = CICLOS_COD AND "+
+                                             "CALIFICACIONES_ANO_CARRERA = ANO_CARRERA_COD AND ESTUDIANTE_CUI = '"+Cui+"' AND CICLOS_COD = '"+ciclo+"' AND ESTUDIANTE_ESTATUS = '1'");
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                AnoCarreraEstudent = rs.getString(1);
+            }    
+            
+        } catch (Exception e) {
+             System.out.println("ERROR: " + e);
         }
     }
 

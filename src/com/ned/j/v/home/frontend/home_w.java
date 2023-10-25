@@ -275,7 +275,7 @@ public class home_w extends javax.swing.JFrame {
         jpanel_container.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setText("NED, Lic. Celbin Rudy Carbajal Estevez");
+        jLabel2.setText("INED, Lic. Celbin Rudy Carbajal Estevez");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ned/j/v/public_proyect/logo.png"))); // NOI18N
 

@@ -15,6 +15,7 @@ public class home_calificaciones_add extends javax.swing.JDialog {
     ArrayList<String> MateriaID_ = new ArrayList<>();
     ArrayList<String> CicloID_ = new ArrayList<>();
     String IDanoCarra = "";
+    String IDCarrera = "";
     String IDEstudent = "";
     String validNotaExist = "";
     String NotaIngredaResto = "";
@@ -207,6 +208,7 @@ public class home_calificaciones_add extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         obtenerValorAnoCarrera(txt_cui.getText());
+        obtenerValorCarrera(txt_cui.getText());
         obtenerIDEstudent(txt_cui.getText());
         
         if(IDanoCarra == ""){
@@ -217,7 +219,7 @@ public class home_calificaciones_add extends javax.swing.JDialog {
             MateriaID_ = new ArrayList<>();
             CicloID_ = new ArrayList<>();
             
-            obtenerMateria(IDanoCarra);
+            obtenerMateria(IDanoCarra, IDCarrera);
             obtenerCiclo();
             validado = true;
         }
@@ -345,7 +347,25 @@ public class home_calificaciones_add extends javax.swing.JDialog {
         }
      }
      
-     private void obtenerMateria(String ano_carrera){
+     private void obtenerValorCarrera(String Cui){
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try {
+            Connection connection_ = conectionDB.getConnection();
+            ps = connection_.prepareStatement("SELECT ESTUDIANTE_CARRERA FROM TBL_ESTUDIANTE WHERE ESTUDIANTE_CUI = '"+Cui+"'");    
+            rs = ps.executeQuery();
+            
+             while(rs.next()){
+                IDCarrera = rs.getString(1);
+             }          
+            
+        } catch (SQLException e) {
+             System.out.println("ERROR: " + e);
+        }
+     }
+     
+     private void obtenerMateria(String ano_carrera, String carrera){
         PreparedStatement ps;
         ResultSet rs;
         ResultSetMetaData rsmd;
@@ -353,7 +373,7 @@ public class home_calificaciones_add extends javax.swing.JDialog {
         
         try {
             Connection connection_ = conectionDB.getConnection();
-            ps = connection_.prepareStatement("SELECT MATERIAS_COD, MATERIAS_NOMBRE FROM TBL_MATERIAS WHERE MATERIAS_ANO_CARRERA = '"+ano_carrera+"'");    
+            ps = connection_.prepareStatement("SELECT MATERIAS_COD, MATERIAS_NOMBRE FROM TBL_MATERIAS WHERE MATERIAS_ANO_CARRERA = '"+ano_carrera+"' AND MATERIAS_CARRERA = '"+carrera+"' AND MATERIAS_ESTATUS = '1'");    
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             column = rsmd.getColumnCount();
@@ -413,19 +433,20 @@ public class home_calificaciones_add extends javax.swing.JDialog {
      private void funcionUnidadI(String estudent, String materia, String ciclo, int not){
         PreparedStatement ps;
         ResultSet rs;
-        String InsertSQL = "INSERT TBL_CALIFICACIONES (CALIFICACIONES_ESTUDIANTE, CALIFICACIONES_MATERIA, CALIFICACIONES_CICLO, CALIFICACIONES_UNIDAD_I, CALIFICACIONES_UNIDAD_II, CALIFICACIONES_UNIDAD_III, CALIFICACIONES_UNIDAD_IV) " +
-                            "VALUES (?,?,?,?,?,?,?)";
+        String InsertSQL = "INSERT TBL_CALIFICACIONES (CALIFICACIONES_ESTUDIANTE, CALIFICACIONES_MATERIA, CALIFICACIONES_ANO_CARRERA, CALIFICACIONES_CICLO, CALIFICACIONES_UNIDAD_I, CALIFICACIONES_UNIDAD_II, CALIFICACIONES_UNIDAD_III, CALIFICACIONES_UNIDAD_IV) " +
+                            "VALUES (?,?,?,?,?,?,?,?)";
         
         try {
             Connection connection_ = conectionDB.getConnection();
             ps = connection_.prepareStatement(InsertSQL);
             ps.setString(1, estudent);
             ps.setString(2, materia);
-            ps.setString(3, ciclo);
-            ps.setInt(4, not);
-            ps.setInt(5, 0);
+            ps.setString(3, IDanoCarra);
+            ps.setString(4, ciclo);
+            ps.setInt(5, not);
             ps.setInt(6, 0);
             ps.setInt(7, 0);
+            ps.setInt(8, 0);
             ps.executeUpdate();
             
         } catch (Exception e) {

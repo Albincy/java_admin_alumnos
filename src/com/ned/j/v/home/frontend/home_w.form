@@ -527,7 +527,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="NED, Lic. Celbin Rudy Carbajal Estevez"/>
+            <Property name="text" type="java.lang.String" value="INED, Lic. Celbin Rudy Carbajal Estevez"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
