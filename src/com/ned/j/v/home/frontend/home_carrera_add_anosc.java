@@ -1,6 +1,7 @@
 package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.home.backend.home_register_back;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 public class home_carrera_add_anosc extends javax.swing.JDialog {
@@ -9,6 +10,7 @@ public class home_carrera_add_anosc extends javax.swing.JDialog {
     public home_carrera_add_anosc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/ned/j/v/public_proyect/icon.png")));
         this.setLocationRelativeTo(null);
     }
 

@@ -2,6 +2,7 @@ package com.ned.j.v.home.frontend;
 
 import com.ned.j.v.data.conectionDB;
 import com.ned.j.v.home.backend.home_datosPersona;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,7 @@ public class home_inscripciones_comprobar extends javax.swing.JDialog {
     public home_inscripciones_comprobar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/ned/j/v/public_proyect/icon.png")));
         this.setLocationRelativeTo(null);
         obtenerCiclo();
     }
